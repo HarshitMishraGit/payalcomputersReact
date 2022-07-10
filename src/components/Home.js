@@ -1,9 +1,8 @@
 import React from "react";
-import CrouselScroll from "./CrouselScroll";
+// import CrouselScroll from "./CrouselScroll";
 import Slide from "react-reveal/Slide";
 import Card from "./Card";
 import Intro from "./Intro";
-
 let content = [
   {
     title: "Flex/Banner",
@@ -39,13 +38,13 @@ function Home() {
 
       <div className="scrolling_Content mt-4">
         <div className="flex flex-col md:flex-row md:space-x-2 justify-center card-1 mt-4 w-full mx-2">
-          <Slide left duration={2000}>
-            <img
+          <Slide duration={2000} left >
+            <img alt="Content_image"
               src={process.env.PUBLIC_URL + "img3.png"}
               className="md:w-1/2  bg-orange-200 shadow-md border-0 rounded-lg md:p-3 mx-4"
             ></img>
           </Slide>
-          <Slide right duration="2000">
+          <Slide duration={2000} right >
             <Card
               lable={content[0].lable}
               title={content[0].title}
@@ -54,28 +53,28 @@ function Home() {
           </Slide>
         </div>
         <div className="flex flex-col-reverse md:flex-row md:space-x-2 justify-center card-1 mt-4 w-full mx-2">
-          <Slide left duration="2000">
+          <Slide duration={2000} left >
             <Card
               lable={content[1].lable}
               title={content[1].title}
               content={content[1].content}
             />
           </Slide>
-          <Slide right duration="2000">
-            <img
+          <Slide duration={2000} right >
+            <img alt="Content_image"
               src={process.env.PUBLIC_URL + "img1.png"}
               className="md:w-1/2  bg-gray-200 shadow-md border-0 rounded-lg md:p-3 mx-4"
             ></img>
           </Slide>
               </div>
               <div className="flex flex-col md:flex-row md:space-x-2 justify-center card-1 mt-4 w-full mx-2">
-          <Slide left duration={2000}>
-            <img
+          <Slide duration={2000} left >
+            <img alt="Content_image"
               src={process.env.PUBLIC_URL + "visitingcard.png"}
               className="md:w-1/2  bg-white shadow-md border-0 rounded-lg md:p-3 mx-4"
             ></img>
           </Slide>
-          <Slide right duration="2000">
+          <Slide duration={2000} right >
             <Card
               lable={content[2].lable}
               title={content[2].title}
@@ -84,15 +83,15 @@ function Home() {
           </Slide>
               </div>
               <div className="flex flex-col-reverse md:flex-row md:space-x-2 justify-center card-1 mt-4 w-full mx-2">
-          <Slide left duration="2000">
+          <Slide duration={2000} left >
             <Card
               lable={content[3].lable}
               title={content[3].title}
               content={content[3].content}
             />
           </Slide>
-          <Slide right duration="2000">
-            <img
+          <Slide duration={2000} right >
+            <img alt="Content_image"
               src={process.env.PUBLIC_URL + "weddingimg.png"}
               className="md:w-1/2  bg-gray-200 shadow-md border-0 rounded-lg md:p-3 mx-4 "
             ></img>

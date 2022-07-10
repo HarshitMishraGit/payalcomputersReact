@@ -51,16 +51,16 @@ function Navbarcomp() {
   </div>
   <Navbar.Collapse>
     <Navbar.Link
-      href="/navbars"
+      href="/"
       active={true}
     >
       Home
     </Navbar.Link>
-    <Navbar.Link href="/navbars">
+    <Navbar.Link href="/about">
       About
     </Navbar.Link>
-    <Navbar.Link href="/navbars">
-      Services
+    <Navbar.Link href="/store">
+      Store
     </Navbar.Link>
     <Navbar.Link href="/navbars">
       Pricing
