@@ -2,13 +2,17 @@ import React, { Fragment,useState,useEffect } from 'react'
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useNavigate } from 'react-router-dom';
 import * as Yup from "yup";
-
-// import * as jose from 'jose'
+import { useSelector, useDispatch } from 'react-redux/es/exports';
 import "yup-phone";
 import SuccessAlertComp from '../Alert/SuccessAlertComp';
 import WarningAlertcomp from '../Alert/WarningAlertcomp';
+import { actions } from '../../store/userStore';
+import { setname } from '../../store/userStore';
+
 const axios = require('axios')
 function Login() {
+    const name = useSelector((store) => store.users.name);
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const [Login, setLogin] = useState(false);
     const [NotRegistered, setNotRegistered] = useState(false);
@@ -32,11 +36,18 @@ function Login() {
         axios.post("http://localhost/__payalComputersBackend/_login.php", data).then((response) => {
             console.log(response);
             const message = response.data.message;
+            const newname = response.data.name;
             if (message == "ok") {
+                const jwt = response.data.jwt;
                 setLogin(true);
+                // setting jwt token in the localstorage
+                localStorage.setItem('token',jwt)
+                // dispatch(actions.name("harshit"))
             }
             else {
                 setNotRegistered(true)
+                // dispatch(setname("newName"))
+
             }
             
         });
@@ -45,7 +56,8 @@ function Login() {
         <Fragment>
             {Login && <SuccessAlertComp dismiss={setLogin} exclamation="Hey User " message="You have successfully Logged IN" />}
             {NotRegistered && <WarningAlertcomp dismiss={setNotRegistered} exclamation="Hey User" message="Invalid Cridentials"/>}
-        <div className='w-1/3 mx-auto my-10 bg-gray-200 px-7 py-3 rounded-lg'>
+            <div>This is the value of the name which is logged in : { name}</div>    
+    <div className='w-1/3 mx-auto my-10 bg-gray-200 px-7 py-3 rounded-lg'>
      <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
           
 <Form>
