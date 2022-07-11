@@ -67,7 +67,7 @@ function Navbarcomp() {
         Settings
       </Dropdown.Item>
       <Dropdown.Item>
-        Earnings
+       Cart
       </Dropdown.Item>
       <Dropdown.Divider />
       <Dropdown.Item onClick={()=>setshowLogooutModal(true)}>

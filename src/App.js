@@ -8,6 +8,9 @@ import UserData from './store/userStore';
 // import axios from 'axios';
 // import { useEffect, useState } from "react";
 import UserDataComp from "./components/UserDataComp";
+import Dashboardcomp from "./components/Dashboard/Dashboardcomp";
+import Additems from "./components/Admin/Additems";
+import AllItemsInStore from "./components/Items/AllItemsInStore";
 
 
 function App() {
@@ -33,6 +36,10 @@ function App() {
           <Route path="/" element={<Home/>} />
           <Route path="/Auth" element={<MainAuth/>} />
           <Route path="/user" element={<UserDataComp/>} />
+        <Route path="/dashboard" element={<Dashboardcomp />} />
+        <Route path="/additems" element={<Additems />} />
+        <Route path="/store" element={<AllItemsInStore />} />
+        
           <Route path="*" element={<NotFound/>} />
 
           
