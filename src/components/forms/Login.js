@@ -2,12 +2,12 @@ import React, { Fragment,useState,useEffect } from 'react'
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useNavigate } from 'react-router-dom';
 import * as Yup from "yup";
+import * as jose from 'jose';
 import { useSelector, useDispatch } from 'react-redux/es/exports';
 import "yup-phone";
 import SuccessAlertComp from '../Alert/SuccessAlertComp';
 import WarningAlertcomp from '../Alert/WarningAlertcomp';
-import { actions } from '../../store/userStore';
-import { setname } from '../../store/userStore';
+import { setname , setemail, setid, setlogin, setmobile } from '../../store/userStore';
 
 const axios = require('axios')
 function Login() {
@@ -41,8 +41,16 @@ function Login() {
                 const jwt = response.data.jwt;
                 setLogin(true);
                 // setting jwt token in the localstorage
-                localStorage.setItem('token',jwt)
-                // dispatch(actions.name("harshit"))
+                localStorage.setItem('token', jwt)
+
+//==================>>>>>>>>>>>>>> to display immidiate action on the login page
+                const decodedJwt = jose.decodeJwt(jwt)
+                const userDataRecieve = decodedJwt.data;
+                dispatch(setlogin(true));
+                dispatch(setname(userDataRecieve.name));
+                dispatch(setid(userDataRecieve.id));
+                dispatch(setemail(userDataRecieve.email));
+                dispatch(setmobile(userDataRecieve.mobile));
             }
             else {
                 setNotRegistered(true)

@@ -2,6 +2,8 @@ import * as jose from 'jose'
 
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 // create slice want three params name , initial value and reducer function
+const initialState = { id: "", name: "", mobile: "", createdAt: "", email: "",login:false };
+
     const token=localStorage.getItem('token');
     if (token) {
         
@@ -9,13 +11,14 @@ import { configureStore, createSlice } from "@reduxjs/toolkit";
         const decodedJwt = jose.decodeJwt(token)
         // console.log(decodedJwt)
         const userDataRecieve = decodedJwt.data;
+        initialState.name = userDataRecieve.name;
+        initialState.login = true;
         if (!decodedJwt) {
             localStorage.removeItem(token);
            
         }
     }
     
-const initialState = { id: "", name: "", mobile: "", createdAt: "", email: "",login:false };
 const userData = createSlice({
     name: "users",
     initialState,
