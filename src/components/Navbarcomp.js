@@ -87,8 +87,8 @@ function Navbarcomp() {
     <Navbar.Link href="/about">
       About
     </Navbar.Link>
-    <Navbar.Link href="/store">
-      Store
+    <Navbar.Link href="/ordernow">
+      Order Now
     </Navbar.Link>
     <Navbar.Link href="/navbars">
       Pricing

@@ -11,25 +11,13 @@ import UserDataComp from "./components/UserDataComp";
 import Dashboardcomp from "./components/Dashboard/Dashboardcomp";
 import Additems from "./components/Admin/Additems";
 import AllItemsInStore from "./components/Items/AllItemsInStore";
+import OrderItem from "./components/orderItem/OrderItem";
 
 
 function App() {
-  // const [data, setdata] = useState([]);
-  // useEffect(() => {
-  //   axios.get("http://localhost/__payalComputersBackend/_userdata.php").then((response) => {
-  //     // console.log(response);
-  //       const message = response.data.message;
-  //       if (message == "ok") {
-  //         setdata(response.data);
-  //         console.log("This is user data",data)
-  //       } else if (message == "notLogin") {
-  //           // setNotRegistered(true)
-  //         console.log("This is user data",response)
-  //       }
-  //   });
-  // }, []);
+
   return (
-        // <UserData.Provider value={{userData:data}}>
+      
       <Router>
       <Navbarcomp />
         <Routes>
@@ -37,8 +25,9 @@ function App() {
           <Route path="/Auth" element={<MainAuth/>} />
           <Route path="/user" element={<UserDataComp/>} />
         <Route path="/dashboard" element={<Dashboardcomp />} />
-        <Route path="/additems" element={<Additems />} />
-        <Route path="/store" element={<AllItemsInStore />} />
+        {/* <Route path="/additems" element={<Additems />} /> */}
+        {/* <Route path="/store" element={<AllItemsInStore />} /> */}
+        <Route path="/orderNow" element={<OrderItem />} />
         
           <Route path="*" element={<NotFound/>} />
 

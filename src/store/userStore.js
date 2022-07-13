@@ -2,7 +2,7 @@ import * as jose from 'jose'
 
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 // create slice want three params name , initial value and reducer function
-const initialState = { id: "", name: "", mobile: "", createdAt: "", email: "",login:false };
+const initialState = { id: "", name: "", mobile: "", createdAt: "", email: "",login:false ,role:"user"};
 
     const token=localStorage.getItem('token');
     if (token) {
@@ -13,6 +13,11 @@ const initialState = { id: "", name: "", mobile: "", createdAt: "", email: "",lo
         const userDataRecieve = decodedJwt.data;
         initialState.name = userDataRecieve.name;
         initialState.login = true;
+        initialState.createdAt=userDataRecieve.createdAt;
+        initialState.id=userDataRecieve.id;
+        initialState.mobile=userDataRecieve.email;
+        initialState.email=userDataRecieve.mobile;
+        initialState.role=userDataRecieve.role;
         if (!decodedJwt) {
             localStorage.removeItem(token);
            
@@ -28,13 +33,15 @@ const userData = createSlice({
         setmobile: (state, action) => void(state.mobile = action.payload),
         setcreatedAt: (state, action) => void(state.createdAt = action.payload),
         setemail: (state, action) => void(state.email = action.payload),
-        setlogin:(state,action)=>void(state.login=action.payload)
+        setrole: (state, action) => void(state.role = action.payload),
+        setlogin: (state, action) => void (state.login = action.payload)
+        
     }
 });
 const store = configureStore({reducer:{users:userData.reducer}});
 // export default userData.actions;
 // export const actions = userData.actions;
-export const { setid, setname, setmobile, setcreatedAt, setemail, setlogin } = userData.actions;
+export const { setid, setname, setmobile, setcreatedAt, setemail, setlogin,setrole } = userData.actions;
 export default store;
 // export default {store,action:userData.actions};
 

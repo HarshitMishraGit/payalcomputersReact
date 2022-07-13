@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux/es/exports';
 import "yup-phone";
 import SuccessAlertComp from '../Alert/SuccessAlertComp';
 import WarningAlertcomp from '../Alert/WarningAlertcomp';
-import { setname , setemail, setid, setlogin, setmobile } from '../../store/userStore';
+import { setname , setemail, setid, setlogin, setmobile, setrole } from '../../store/userStore';
 
 const axios = require('axios')
 function Login() {
@@ -51,6 +51,7 @@ function Login() {
                 dispatch(setid(userDataRecieve.id));
                 dispatch(setemail(userDataRecieve.email));
                 dispatch(setmobile(userDataRecieve.mobile));
+                dispatch(setrole(userDataRecieve.role));
             }
             else {
                 setNotRegistered(true)
