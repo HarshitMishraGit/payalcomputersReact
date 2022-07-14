@@ -8,8 +8,8 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import SuccessAlertComp from '../Alert/SuccessAlertComp';
 import WarningAlertcomp from '../Alert/WarningAlertcomp';
 import ItemBluePrint from '../orderItem/ItemBluePrint'
-function OrderFlex(props) {
-    const navigate = useNavigate();
+
+function OrderVisitingCard(props) {
     const userId = useSelector((store) => store.users.name);
     const userMobile = useSelector((store) => store.users.mobile);
     const userEmail = useSelector((store) => store.users.email);
@@ -37,15 +37,12 @@ function OrderFlex(props) {
       console.log("The size of the file is ",size)
     }
     const initialValues = {
-        description:'',
-        width:0,
-        height:0
+        
+        description:"",
           
     };
     const validationSchema = Yup.object().shape({
         description: Yup.string().required("Description is required"),
-        width: Yup.number().positive().required("please give the width "),
-        height:Yup.number().positive().required("please give the height "),
       
     });
     const UploadImageHandeler = () => {
@@ -62,14 +59,9 @@ function OrderFlex(props) {
         data.mobile=userMobile;
         data.email = userEmail;
         data.name = userName;
-        // "id":12,
-        // "mobile":8795414135,
-        // "name":"Harshit Mishra",
-        // "email":"harshitlove28@gmail.com",
-        // "item":"flex",
-        // "image":"hjsdjah"
+     
  // ============>>>>>>>> It is very important to provide responseType so that we can convert the file to original form===================//
-    axios.post("https://payalcomputers.com/__testingversion1.0.0/__payalComputersBackend/_aNewOrderReceived.php", data).then((res) => {
+ axios.post("https://payalcomputers.com/__testingversion1.0.0/__payalComputersBackend/_aNewOrderReceived.php", data).then((res) => {
                         // console.log("This is url ", url)
                         // setimage(url)
         console.log("This is the respose recieve from server : ", res)
@@ -87,6 +79,7 @@ function OrderFlex(props) {
         })
                                             
       console.log(data)
+                                     
       
       
       
@@ -109,21 +102,7 @@ function OrderFlex(props) {
                   
    <input hidden type="file" id="" className=" focus:outline-none focus:ring-offset-0 text-black placeholder-gray-700 text-sm rounded-lg  w-full p-2.5 bg-gray-100" placeholder="" name='pic' ref={fileref}    onChange={fileHandeler} />
                      
-                    <div>
-                        <p className='text-sm text-gray-200 my-2'>Please Give the Dimesion of the item : </p>
-                        <div className='flex flex-row  gap-2'> 
-    <Field type="number" id="price" className="block p-2.5 w-1/2 text-sm text-gray-100 bg-gradient-to-r from-indigo-700 via-purple-700 to-pink-700 rounded-lg  focus:outline-none focus:ring-1 focus:ring-blue-600 placeholder:text-gray-200" placeholder={`width | चौड़ाई  ${dimension}`}  name="width"  validate={(value)=>setwidth(value)} />
-    
-    <Field type="number" id="price" className="block p-2.5 w-1/2 text-sm text-gray-100 bg-gradient-to-r from-indigo-700 via-purple-700 to-pink-700 rounded-lg  focus:outline-none focus:ring-1 focus:ring-blue-600 placeholder:text-gray-200" placeholder={`height | ऊंचाई ${dimension}`} name="height"  validate={(value)=>setheight(value)} />
-        </div> 
-        <div className='flex flex-row justify-between'>
-        <ErrorMessage className="text-orange-300 text-xs" name="width" component="span"/> <br></br>
-<ErrorMessage className="text-orange-300 text-xs" name="height" component="span"/>
-        </div>
-                <ItemBluePrint width={width} height={height} itemName={props.itemName} dimension={ props.dimension} />
-    </div>
-          
-          
+                  
   
                       
  
@@ -156,4 +135,4 @@ function OrderFlex(props) {
   )
 }
 
-export default OrderFlex
+export default OrderVisitingCard

@@ -15,8 +15,8 @@ const initialState = { id: "", name: "", mobile: "", createdAt: "", email: "",lo
         initialState.login = true;
         initialState.createdAt=userDataRecieve.createdAt;
         initialState.id=userDataRecieve.id;
-        initialState.mobile=userDataRecieve.email;
-        initialState.email=userDataRecieve.mobile;
+        initialState.mobile=userDataRecieve.mobile;
+        initialState.email=userDataRecieve.email;
         initialState.role=userDataRecieve.role;
         if (!decodedJwt) {
             localStorage.removeItem(token);

@@ -33,7 +33,7 @@ function Login() {
  
     const onSubmit = (data) => {
         console.log("This is the recived data : " , data)
-        axios.post("http://localhost/__payalComputersBackend/_login.php", data).then((response) => {
+        axios.post("https://payalcomputers.com/__testingversion1.0.0/__payalComputersBackend/_login.php", data).then((response) => {
             console.log(response);
             const message = response.data.message;
             const newname = response.data.name;

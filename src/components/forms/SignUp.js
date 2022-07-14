@@ -30,7 +30,7 @@ function SignUp() {
  
     const onSubmit = (data) => {
         console.log("This is the recived data : " , data)
-        axios.post("http://localhost/__payalComputersBackend/_Signup.php", data).then((response) => {
+        axios.post("https://payalcomputers.com/__testingversion1.0.0/__payalComputersBackend/_signUp.php", data).then((response) => {
           console.log(response);
             let message = response.data.message;
           if (message === "userExist") {
