@@ -36,16 +36,14 @@ function OrderItem() {
       const initialValues = {
         itemName: "",
         width:0,
-        height:0,
-        pic:""
+        height:0
           
     };
     const validationSchema = Yup.object().shape({
         itemName: Yup.string().required("Please Select a item | कृपया एक आइटम चुनें"),
         description: Yup.string().required("Description is required"),
-        width: Yup.number().positive().required("please give the width "),
-        height:Yup.number().positive().required("please give the height "),
-        // pic:Yup.string().required("Please select an Image")
+        width:(selectedItem==="flex"||selectedItem==="poster")? Yup.number().positive().required("please give the width "):0,
+        height:(selectedItem==="flex"||selectedItem==="poster")?Yup.number().positive().required("please give the height "):0,
       
     });
     const UploadImageHandeler = () => {
@@ -55,11 +53,11 @@ function OrderItem() {
     const itemValidation = (value) => {
         if (value === 'flex') {
             setshowFlexDimensionFields(true);
-            setselectedItem('flex')
+            setselectedItem(prevstate=>'flex');
             setdimension(prevstate=> 'feet')
         } else if (value === 'poster') {
             setshowFlexDimensionFields(true);
-            setselectedItem('Poster')
+            setselectedItem(prevstate=>'Poster');
             setdimension(prevstate=> 'inches')
             
         } else {
@@ -71,7 +69,7 @@ function OrderItem() {
     
     const [image, setimage] = useState('');
     const onSubmit = (data) => {
-        data.pic = image;
+        // data.pic = image;
      
  // ============>>>>>>>> It is very important to provide responseType so that we can convert the file to original form===================//
     // axios.post("http://localhost/__payalComputersBackend/_additem.php", data).then((res) => {
@@ -131,8 +129,12 @@ function OrderItem() {
             <Field type="number" id="price" className="block p-2.5 w-1/2 text-sm text-gray-100 bg-gradient-to-r from-indigo-700 via-purple-700 to-pink-700 rounded-lg  focus:outline-none focus:ring-1 focus:ring-blue-600 placeholder:text-gray-200" placeholder={`width | चौड़ाई  ${dimension}`}  name="width"  validate={(value)=>setwidth(value)} />
             
             <Field type="number" id="price" className="block p-2.5 w-1/2 text-sm text-gray-100 bg-gradient-to-r from-indigo-700 via-purple-700 to-pink-700 rounded-lg  focus:outline-none focus:ring-1 focus:ring-blue-600 placeholder:text-gray-200" placeholder={`height | ऊंचाई ${dimension}`} name="height"  validate={(value)=>setheight(value)} />
-                              </div> 
-                              <ItemBluePrint width={width} height={height} itemName={selectedItem} dimension={ dimension} />
+                </div> 
+                <div className='flex flex-row justify-between'>
+                <ErrorMessage className="text-orange-300 text-xs" name="width" component="span"/> <br></br>
+   <ErrorMessage className="text-orange-300 text-xs" name="height" component="span"/>
+               </div>
+                      <ItemBluePrint width={width} height={height} itemName={selectedItem} dimension={ dimension} />
           </div>
           
           
@@ -140,8 +142,7 @@ function OrderItem() {
                       
   {/* Only for flex and poster  */}
 
-   <ErrorMessage className="text-orange-300 text-xs" name="width" component="span"/> <br></br>
-   <ErrorMessage className="text-orange-300 text-xs" name="height" component="span"/>
+  
                <p className='text-sm text-gray-200'>Please upload the format below and attach as image | कृपया नीचे प्रारूप अपलोड करें और फ़ोटो के रूप में संलग्न करें </p>
                       <div className='flex flex-row gap-3'>
                       <button
