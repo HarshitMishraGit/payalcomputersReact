@@ -8,10 +8,12 @@ import "yup-phone";
 import SuccessAlertComp from '../Alert/SuccessAlertComp';
 import WarningAlertcomp from '../Alert/WarningAlertcomp';
 import { setname , setemail, setid, setlogin, setmobile, setrole } from '../../store/userStore';
+import Loadingcomp from '../Loadingcomp';
 
 const axios = require('axios')
 function Login() {
     const name = useSelector((store) => store.users.name);
+    const [isLoading, setisLoading] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [Login, setLogin] = useState(false);
@@ -32,9 +34,12 @@ function Login() {
         });
  
     const onSubmit = (data) => {
-        console.log("This is the recived data : " , data)
+        console.log("This is the recived data : ", data)
+        setisLoading(true);
         axios.post("https://payalcomputers.com/__testingversion1.0.0/__payalComputersBackend/_login.php", data).then((response) => {
             console.log(response);
+            setisLoading(false)
+
             const message = response.data.message;
             const newname = response.data.name;
             if (message == "ok") {
@@ -55,6 +60,7 @@ function Login() {
             }
             else {
                 setNotRegistered(true)
+
                 // dispatch(setname("newName"))
 
             }
@@ -63,9 +69,9 @@ function Login() {
       };
     return (
         <Fragment>
+            {isLoading && <Loadingcomp/>}
             {Login && <SuccessAlertComp dismiss={setLogin} exclamation="Hey User " message="You have successfully Logged IN" />}
             {NotRegistered && <WarningAlertcomp dismiss={setNotRegistered} exclamation="Hey User" message="Invalid Cridentials"/>}
-            <div>This is the value of the name which is logged in : { name}</div>    
     <div className='w-1/3 mx-auto my-10 bg-gray-200 px-7 py-3 rounded-lg'>
      <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
           

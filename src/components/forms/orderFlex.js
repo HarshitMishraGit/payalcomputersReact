@@ -8,9 +8,11 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import SuccessAlertComp from '../Alert/SuccessAlertComp';
 import WarningAlertcomp from '../Alert/WarningAlertcomp';
 import ItemBluePrint from '../orderItem/ItemBluePrint'
+import ShowOrderNoModal from '../orderItem/ShowOrderNoModal';
+import Loadingcomp from '../Loadingcomp';
 function OrderFlex(props) {
     const navigate = useNavigate();
-    const userId = useSelector((store) => store.users.name);
+    const userId = useSelector((store) => store.users.id);
     const userMobile = useSelector((store) => store.users.mobile);
     const userEmail = useSelector((store) => store.users.email);
     const userName = useSelector((store) => store.users.name);
@@ -24,7 +26,11 @@ function OrderFlex(props) {
     const [dimension, setdimension] = useState('');
     const [addedItem, setaddedItem] = useState(false);
     const [notAddedItem, setnotAddedItem] = useState(false);
-    const [image, setimage] = useState('');
+  const [image, setimage] = useState('');
+//  ============= to show the confirmation ==========================
+  const [showConfirmationModal, setshowConfirmationModal] = useState(false);
+  const [orderId, setorderId] = useState('');
+  const [isLoading, setisLoading] = useState(false);
     const fileHandeler = (e) => {
         // setfilevalue(e.target.files[0])
         reader.readAsDataURL(e.target.files[0])
@@ -62,26 +68,15 @@ function OrderFlex(props) {
         data.mobile=userMobile;
         data.email = userEmail;
         data.name = userName;
-        // "id":12,
-        // "mobile":8795414135,
-        // "name":"Harshit Mishra",
-        // "email":"harshitlove28@gmail.com",
-        // "item":"flex",
-        // "image":"hjsdjah"
+        setisLoading(true);
  // ============>>>>>>>> It is very important to provide responseType so that we can convert the file to original form===================//
     axios.post("https://payalcomputers.com/__testingversion1.0.0/__payalComputersBackend/_aNewOrderReceived.php", data).then((res) => {
                         // console.log("This is url ", url)
                         // setimage(url)
-        console.log("This is the respose recieve from server : ", res)
-        // if (res.data.message === "ok") {
-        //     setaddedItem(true);
-        //     setTimeout(() => {
-        //         navigate('/store')
-        //     }, 2000);
-          
-        // } else if (res.data.message === "error") {
-        //     setnotAddedItem(true);
-        // }
+      console.log("This is the respose recieve from server : ", res.data)
+      setisLoading(false);
+      setorderId(res.data.orderId);
+      setshowConfirmationModal(true)
         }).catch(err => {
             console.log(err)
         })
@@ -94,7 +89,9 @@ function OrderFlex(props) {
         
     };
   return (
-      <div>
+    <div>
+      { isLoading && <Loadingcomp/>}
+      {showConfirmationModal && <ShowOrderNoModal orderId={orderId} show={ true} />}
     {addedItem && <SuccessAlertComp dismiss={setaddedItem} exclamation="Admin " message="You have successfully Added the item" />}
     {notAddedItem && <WarningAlertcomp dismiss={setnotAddedItem} exclamation="Admin" message="Somethin went wrong"/>}
          <Formik initialValues={initialValues}   validationSchema={validationSchema} onSubmit={onSubmit} >

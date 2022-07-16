@@ -4,8 +4,10 @@ import * as Yup from "yup";
 import "yup-phone";
 import WarningAlertcomp from '../Alert/WarningAlertcomp';
 import SuccessAlertComp from '../Alert/SuccessAlertComp';
+import Loadingcomp from '../Loadingcomp';
 const axios = require('axios')
 function SignUp() {
+  const [isLoading, setisLoading] = useState(false);
   const [isregistered, setisregistered] = useState(false);
   const [registrationsuccess, setregistrationsuccess] = useState(false);
     const initialValues = {
@@ -28,10 +30,12 @@ function SignUp() {
           
         });
  
-    const onSubmit = (data) => {
+  const onSubmit = (data) => {
+    setisLoading(true);
         console.log("This is the recived data : " , data)
         axios.post("https://payalcomputers.com/__testingversion1.0.0/__payalComputersBackend/_signUp.php", data).then((response) => {
           console.log(response);
+          setisLoading(false)
             let message = response.data.message;
           if (message === "userExist") {
             setisregistered(true)
@@ -45,7 +49,8 @@ function SignUp() {
  
       };
     return (
-        <Fragment>
+      <Fragment>
+           {isLoading && <Loadingcomp/>}
         {registrationsuccess && <SuccessAlertComp dismiss={setregistrationsuccess} exclamation="Hey user" message="You are successfully registered"/>}
         {isregistered && <WarningAlertcomp dismiss={setisregistered} exclamation="Hey user" message="You are already registered" />}
       

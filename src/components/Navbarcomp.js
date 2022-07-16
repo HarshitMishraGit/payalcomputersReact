@@ -3,7 +3,9 @@ import { useNavigate } from 'react-router';
 import { HiStatusOnline } from 'react-icons/hi';
 import { Navbar, Dropdown, Avatar } from 'flowbite-react';
 import { setname ,setlogin} from '../store/userStore';
-import { useSelector,useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+// import { NavNavLink } from 'react-router-dom';
 import Modalcomp from './Modal/Modalcomp';
 import SuccessAlertComp from './Alert/SuccessAlertComp';
 function Navbarcomp() {
@@ -78,27 +80,38 @@ function Navbarcomp() {
   </div>
   <Navbar.Collapse>
        
-    <Navbar.Link
-      href="/"
-      active={true}
+    <NavLink
+      to="/" className={({ isActive }) =>
+      isActive ? "text-gray-200" : undefined
+    }
     >
-      Home
-    </Navbar.Link>
-    <Navbar.Link href="/about">
+      Home 
+    </NavLink>
+    <NavLink to="/about"    className={({ isActive }) =>
+              isActive ? "text-gray-200" : undefined
+            }>
       About
-    </Navbar.Link>
-    <Navbar.Link href="/ordernow">
+    </NavLink>
+    <NavLink to="/ordernow"className={({ isActive }) =>
+              isActive ? "text-gray-200" : undefined
+            }>
       Order Now
-    </Navbar.Link>
-    <Navbar.Link href="/navbars">
+    </NavLink>
+    <NavLink to="/Pricing"className={({ isActive }) =>
+              isActive ? "text-gray-200" : undefined
+            }>
       Pricing
-    </Navbar.Link>
-    <Navbar.Link href="/navbars">
+    </NavLink>
+    <NavLink to="/navbars"className={({ isActive }) =>
+              isActive ? "text-gray-200" : undefined
+            }>
       Contact
-          </Navbar.Link>
-          { !islogin && <Navbar.Link href="/auth" >
+          </NavLink>
+          { !islogin && <NavLink to="/auth" className={({ isActive }) =>
+              isActive ? "text-gray-200" : undefined
+            }>
       Login/SignUP
-    </Navbar.Link>}
+    </NavLink>}
   </Navbar.Collapse>
       </Navbar>
       { showlogouttext && <SuccessAlertComp dismiss={setshowlogouttext} exclamation="Hey User" message="You logout successfully"/>}

@@ -9,34 +9,38 @@ import UserData from './store/userStore';
 // import { useEffect, useState } from "react";
 import UserDataComp from "./components/UserDataComp";
 import Dashboardcomp from "./components/Dashboard/Dashboardcomp";
-import AllItemsInStore from "./components/Items/AllItemsInStore";
-import Additems from "./components/Admin/Additems";
+// // import AllItemsInStore from "./components/Items/AllItemsInStore";
+// import Additems from "./components/Admin/Additems";
 import OrderItem from "./components/orderItem/OrderItem";
+import { Fragment } from "react";
+import ShowOrderNoModal from "./components/orderItem/ShowOrderNoModal";
+import UserOrders from "./components/Dashboard/UserOrders";
 
 
 function App() {
 
   return (
-      
-      <Router>
+      <Fragment>
+      {/* // <Router basename={"/"}> */}
       <Navbarcomp />
         <Routes>
           <Route path="/" element={<Home/>} />
           <Route path="/Auth" element={<MainAuth/>} />
           <Route path="/user" element={<UserDataComp/>} />
         <Route path="/dashboard" element={<Dashboardcomp />} />
-        {/* <Route path="/additems" element={<Additems />} /> */}
-        {/* <Route path="/store" element={<AllItemsInStore />} /> */}
+       
         <Route path="/orderNow" element={<OrderItem />} />
+        <Route path="/ordermodal" element={<ShowOrderNoModal show={true} orderId="sidaas" />} />
+        <Route path="/myorders" element={<UserOrders/>} />
         
           <Route path="*" element={<NotFound/>} />
 
           
 
         </Routes>
-          <Footercomp/>
-        </Router>
-      //  </UserData.Provider>
+        <Footercomp />
+        {/* // </Router> */}
+        </Fragment>
   );
 }
 
