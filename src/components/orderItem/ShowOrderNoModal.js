@@ -21,7 +21,6 @@ function ShowOrderNoModal(props) {
       size="lg"
       popup={true}
     >
-      {/* <Modal.Header /> */}
       <Modal.Body>
         <div className="text-center py-5">
           <GiConfirmed className="mx-auto mb-4 h-14 w-14 text-green-400 dark:text-gray-200" />

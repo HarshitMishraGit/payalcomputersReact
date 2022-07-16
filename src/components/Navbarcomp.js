@@ -68,8 +68,8 @@ function Navbarcomp() {
       <Dropdown.Item>
         Settings
       </Dropdown.Item>
-      <Dropdown.Item>
-       Cart
+            <Dropdown.Item onClick={() => { navigate('/myorders')}}>
+      My Orders
       </Dropdown.Item>
       <Dropdown.Divider />
       <Dropdown.Item onClick={()=>setshowLogooutModal(true)}>
