@@ -12,9 +12,16 @@ function LoadAllOrdersList() {
   const [filterData, setfilterData] = useState({})
   const [orders, setorders] = useState([]);
   const [selectedFilterOption, setselectedFilterOption] = useState('');
+  const [allowToSearchFilter, setallowToSearchFilter] = useState(false);
   const onChangeHandeler = () => { 
-    // console.log(selectRef.current.value)
+    const selectedFilter=selectRef.current.value;
     setselectedFilterOption(selectRef.current.value)
+    if (selectedFilter !== "") {
+      setallowToSearchFilter(true);
+    } else {
+      setallowToSearchFilter(false);
+      
+    }
   }
   const onSearchHandeler = () => { 
     setisLoading(true);
@@ -28,10 +35,7 @@ function LoadAllOrdersList() {
       
     } else if (selectedFilterOption === "byCustomerEmail") {
       setfilterData({ "customerEmail": toSearchValue });
-    } else {
-      setfilterData({});
-      // console.log("The value of the input is empty")
-    }
+    } 
 
     
   }
@@ -68,16 +72,16 @@ size="lg"
       <div>
       <div className=' w-[90%] rounded-lg mx-auto border-2 my-5 bg-gray-50 p-5'>
         <div className='flex flex-row justify-between'>
-              <h2 className='text-2xl text-amber-800 font-bold md:mx-5 mt-4'>All Orders :</h2>
+           <h2 className='text-2xl text-amber-800 font-bold md:mx-5 mt-4'>All Orders :</h2>
           <div className='grid grid-cols-5 gap-3'>
-          <select name='item' ref={selectRef} onChange={ onChangeHandeler} className="col-span-5 col-start-1">
+          <select name='item' ref={selectRef} onChange={ onChangeHandeler} className="col-span-5 col-start-1" >
             <option value="">Filter</option>
             <option value="byDate">By date</option>
             <option value="byOrderId">By Order Id</option>
             <option value="byCustomerEmail">By customer email</option>
           </select>
-          <input ref={inputRef} className='col-span-4 border-2'></input>
-            <BiSearchAlt color='green' size={25} onClick={ onSearchHandeler} />
+         {allowToSearchFilter && <input ref={inputRef} className='col-span-4 border-2'></input>}
+          {allowToSearchFilter &&  <BiSearchAlt color='green' size={25} onClick={ onSearchHandeler} />}
          </div>
         </div>
               <hr className='border-t-2 border-gray-500 my-2'></hr>

@@ -36,10 +36,10 @@ useEffect(() => {
           <div className='md:w-[50%] w-[90%] rounded-lg mx-auto border-2 my-5 bg-gray-50 p-5'>
               <h2 className='text-2xl text-amber-800 font-bold md:mx-5 mt-4'>My Orders :</h2>
               <hr className='border-t-2 border-gray-500 my-2'></hr>
-              <div className='grid grid-cols-7 '>
-                  <p className='col-start-1 bg-gray-800 text-white text-center rounded-lg'>Order Id</p>
-                  <p className='col-start-5 bg-gray-800 text-white text-center rounded-lg'>Item Name</p>
-                  <p className='col-start-7 bg-gray-800 text-white text-center rounded-lg'>Date</p>
+              <div className='grid md:grid-cols-7 grid-cols-3 gap-2'>
+                  <p className='md:col-start-1 col-start-1 bg-gray-800 text-white text-center rounded-lg'>Order Id</p>
+                  <p className='md:col-start-5 col-start-2 bg-gray-800 text-white text-center rounded-lg'>Item Name</p>
+                  <p className='md:col-start-7 col-start-3 bg-gray-800 text-white text-center rounded-lg'>Date</p>
               </div>
           {isLoading && loader}
               {orders.map((item, key) => {
