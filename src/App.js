@@ -15,6 +15,7 @@ import OrderItem from "./components/orderItem/OrderItem";
 import { Fragment } from "react";
 import ShowOrderNoModal from "./components/orderItem/ShowOrderNoModal";
 import UserOrders from "./components/Dashboard/UserOrders";
+import LoadAllOrdersList from "./components/Admin/LoadAllOrdersList";
 
 
 function App() {
@@ -28,10 +29,10 @@ function App() {
           <Route path="/Auth" element={<MainAuth/>} />
           <Route path="/user" element={<UserDataComp/>} />
         <Route path="/dashboard" element={<Dashboardcomp />} />
-       
         <Route path="/orderNow" element={<OrderItem />} />
-        <Route path="/ordermodal" element={<ShowOrderNoModal show={true} orderId="sidaas" />} />
         <Route path="/myorders" element={<UserOrders/>} />
+        <Route path="/env" element={<LoadAllOrdersList/>} />
+       
         
           <Route path="*" element={<NotFound/>} />
 
