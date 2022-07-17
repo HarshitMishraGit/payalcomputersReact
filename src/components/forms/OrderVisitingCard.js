@@ -7,10 +7,13 @@ import { useSelector } from 'react-redux';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import SuccessAlertComp from '../Alert/SuccessAlertComp';
 import WarningAlertcomp from '../Alert/WarningAlertcomp';
-import ItemBluePrint from '../orderItem/ItemBluePrint'
+import ItemBluePrint from '../orderItem/ItemBluePrint';
+import Loadingcomp from '../Loadingcomp';
+import ShowOrderNoModal from '../orderItem/ShowOrderNoModal';
+
 
 function OrderVisitingCard(props) {
-    const userId = useSelector((store) => store.users.name);
+    const userId = useSelector((store) => store.users.id);
     const userMobile = useSelector((store) => store.users.mobile);
     const userEmail = useSelector((store) => store.users.email);
     const userName = useSelector((store) => store.users.name);
@@ -27,7 +30,11 @@ function OrderVisitingCard(props) {
   const [allowToSubmit, setallowToSubmit] = useState(false);
   const [bigImage, setbigImage] = useState(false);
   const [FileErrorMsg, setFileErrorMsg] = useState('')
-    const [image, setimage] = useState('');
+  const [image, setimage] = useState('');
+  //  ============= to show the confirmation ==========================
+  const [showConfirmationModal, setshowConfirmationModal] = useState(false);
+  const [orderId, setorderId] = useState('');
+  const [isLoading, setisLoading] = useState(false);
     const fileHandeler = (e) => {
         // setfilevalue(e.target.files[0])
         reader.readAsDataURL(e.target.files[0])
@@ -37,7 +44,7 @@ function OrderVisitingCard(props) {
         }
         setfilename(e.target.files[0].name)
       let size = e.target.files[0].size
-      console.log("The size of the file is ", size)
+      // console.log("The size of the file is ", size)
       const type = e.target.files[0].type;
       // checking the file type 
       if (type === "image/jpeg" || type === "image/png" || type === "image/jpg") { 
@@ -81,12 +88,13 @@ function OrderVisitingCard(props) {
         data.mobile=userMobile;
         data.email = userEmail;
         data.name = userName;
+        setisLoading(true);
      
  // ============>>>>>>>> It is very important to provide responseType so that we can convert the file to original form===================//
  axios.post("https://payalcomputers.com/__testingversion1.0.0/__payalComputersBackend/_aNewOrderReceived.php", data).then((res) => {
-                        // console.log("This is url ", url)
+                        // // console.log("This is url ", url)
                         // setimage(url)
-        console.log("This is the respose recieve from server : ", res)
+        // console.log("This is the respose recieve from server : ", res)
         // if (res.data.message === "ok") {
         //     setaddedItem(true);
         //     setTimeout(() => {
@@ -96,11 +104,14 @@ function OrderVisitingCard(props) {
         // } else if (res.data.message === "error") {
         //     setnotAddedItem(true);
         // }
+        setisLoading(false);
+        setorderId(res.data.orderId);
+        setshowConfirmationModal(true)
         }).catch(err => {
             console.log(err)
         })
                                             
-      console.log(data)
+      // console.log(data)
                                      
       
       
@@ -109,7 +120,9 @@ function OrderVisitingCard(props) {
         
     };
   return (
-      <div>
+    <div>
+      {isLoading && <Loadingcomp />}
+      {showConfirmationModal && <ShowOrderNoModal orderId={orderId} show={ true} />}
     {addedItem && <SuccessAlertComp dismiss={setaddedItem} exclamation="Admin " message="You have successfully Added the item" />}
     {notAddedItem && <WarningAlertcomp dismiss={setnotAddedItem} exclamation="Admin" message="Somethin went wrong"/>}
          <Formik initialValues={initialValues}   validationSchema={validationSchema} onSubmit={onSubmit} >

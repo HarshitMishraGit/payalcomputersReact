@@ -19,13 +19,14 @@ import LoadAllOrdersList from "./components/Admin/LoadAllOrdersList";
 import { useSelector, useDispatch } from 'react-redux/es/exports';
 function App() {
   const role = useSelector((store) => store.users.role);
+  const islogin = useSelector((store) => store.users.login);
   return (
       <Fragment>
       {/* // <Router basename={"/"}> */}
       <Navbarcomp />
         <Routes>
           <Route path="/" element={<Home/>} />
-          <Route path="/Auth" element={<MainAuth/>} />
+        {!islogin &&  <Route path="/Auth" element={<MainAuth/>} />}
           <Route path="/user" element={<UserDataComp/>} />
         <Route path="/dashboard" element={<Dashboardcomp />} />
         <Route path="/orderNow" element={<OrderItem />} />

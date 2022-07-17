@@ -26,7 +26,7 @@ function Additems() {
         }
         setfilename(e.target.files[0].name)
       let size = e.target.files[0].size
-      console.log("The size of the file is ",size)
+      // console.log("The size of the file is ",size)
     }
       const initialValues = {
         Title: "",
@@ -52,9 +52,9 @@ function Additems() {
      
  // ============>>>>>>>> It is very important to provide responseType so that we can convert the file to original form===================//
     axios.post("http://localhost/__payalComputersBackend/_additem.php", data).then((res) => {
-                        // console.log("This is url ", url)
+                        // // console.log("This is url ", url)
                         // setimage(url)
-        console.log("This is the respose recieve from server : ", res)
+        // console.log("This is the respose recieve from server : ", res)
         if (res.data.message === "ok") {
             setaddedItem(true);
             setTimeout(() => {
@@ -65,10 +65,10 @@ function Additems() {
             setnotAddedItem(true);
         }
                     }).catch(err => {
-                        console.log(err)
+                        // console.log(err)
                     })
                                                         
-      console.log(data)
+      // console.log(data)
       
       
       

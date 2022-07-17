@@ -10,7 +10,7 @@ function UserOrders() {
     const id = useSelector((store) => store.users.id);
     const data = { id };
     const dataJson = JSON.stringify(data);
-    console.log("Is loading", isLoading);
+    // console.log("Is loading", isLoading);
     const loader =(
             <div className='flex flex-col justify-center items-center my-2'>
                  <p className='text-lg text-orange-400 text-center'>Loading ...</p>
@@ -24,9 +24,9 @@ function UserOrders() {
    )
 useEffect(() => {
     axios.post("https://payalcomputers.com/__testingversion1.0.0/__payalComputersBackend/_getItemByUserId.php",dataJson).then((response)=>{
-            console.log("This is the orders ", response.data);
+            // console.log("This is the orders ", response.data);
         setisLoading(false);
-        console.log("Is loading", isLoading);
+        // console.log("Is loading", isLoading);
             setorders(response.data);
         }).catch(err => console.log(err));
 },[])

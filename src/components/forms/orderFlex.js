@@ -95,7 +95,7 @@ function OrderFlex(props) {
     axios.post("https://payalcomputers.com/__testingversion1.0.0/__payalComputersBackend/_aNewOrderReceived.php", data).then((res) => {
                         // console.log("This is url ", url)
                         // setimage(url)
-      console.log("This is the respose recieve from server : ", res.data)
+      // console.log("This is the respose recieve from server : ", res.data)
       setisLoading(false);
       setorderId(res.data.orderId);
       setshowConfirmationModal(true)
@@ -103,7 +103,7 @@ function OrderFlex(props) {
             console.log(err)
         })
                                             
-      console.log(data)
+      // console.log(data)
       
       
       

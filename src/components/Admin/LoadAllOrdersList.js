@@ -13,12 +13,12 @@ function LoadAllOrdersList() {
   const [orders, setorders] = useState([]);
   const [selectedFilterOption, setselectedFilterOption] = useState('');
   const onChangeHandeler = () => { 
-    console.log(selectRef.current.value)
+    // console.log(selectRef.current.value)
     setselectedFilterOption(selectRef.current.value)
   }
   const onSearchHandeler = () => { 
     setisLoading(true);
-    console.log(inputRef.current.value)
+    // console.log(inputRef.current.value)
     const toSearchValue = inputRef.current.value;
     if (selectedFilterOption === "byDate") {
       setfilterData({ "createdAt": toSearchValue });
@@ -30,7 +30,7 @@ function LoadAllOrdersList() {
       setfilterData({ "customerEmail": toSearchValue });
     } else {
       setfilterData({});
-      console.log("The value of the input is empty")
+      // console.log("The value of the input is empty")
     }
 
     
@@ -39,16 +39,16 @@ function LoadAllOrdersList() {
   
   const getAllOrders = () => {
     axios.post("https://payalcomputers.com/__testingversion1.0.0/__payalComputersBackend/_getAllOrders.php",dataJson).then((response)=>{
-            console.log("This is the orders ", response.data);
+            // console.log("This is the orders ", response.data);
         setisLoading(false);
-        // console.log("Is loading", isLoading);
+        // // console.log("Is loading", isLoading);
             setorders(response.data);
         }).catch(err => console.log(err));
     
   }
   useEffect(() => {
     // onSearchHandeler();
-    console.log("This is the json object to send", dataJson);
+    // console.log("This is the json object to send", dataJson);
     getAllOrders(dataJson)
   }, [dataJson]);
   const loader =(

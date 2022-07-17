@@ -38,6 +38,7 @@ function OrderItem() {
         {isLogin &&<option value="Poster">Poster</option>}
         {isLogin &&<option value="Visiting Card">Visiting Card</option>}
        { isLogin &&<option value="Wedding Card">Wedding Card</option>}
+       { isLogin &&<option value="Mohar">Wedding Card</option>}
     </select>
       {selectedItem === "Flex"  && <OrderFlex itemName={ selectedItem}  dimension="feet"/>}
       {selectedItem === "Poster" && <OrderFlex itemName={selectedItem} dimension="inches" />}

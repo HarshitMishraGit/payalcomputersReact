@@ -34,10 +34,10 @@ function Login() {
         });
  
     const onSubmit = (data) => {
-        console.log("This is the recived data : ", data)
+        // console.log("This is the recived data : ", data)
         setisLoading(true);
         axios.post("https://payalcomputers.com/__testingversion1.0.0/__payalComputersBackend/_login.php", data).then((response) => {
-            console.log(response);
+            // console.log(response);
             setisLoading(false)
 
             const message = response.data.message;
@@ -51,12 +51,15 @@ function Login() {
 //==================>>>>>>>>>>>>>> to display immidiate action on the login page
                 const decodedJwt = jose.decodeJwt(jwt)
                 const userDataRecieve = decodedJwt.data;
-                dispatch(setlogin(true));
-                dispatch(setname(userDataRecieve.name));
-                dispatch(setid(userDataRecieve.id));
-                dispatch(setemail(userDataRecieve.email));
-                dispatch(setmobile(userDataRecieve.mobile));
-                dispatch(setrole(userDataRecieve.role));
+                setTimeout(() => {
+                    dispatch(setlogin(true));
+                    dispatch(setname(userDataRecieve.name));
+                    dispatch(setid(userDataRecieve.id));
+                    dispatch(setemail(userDataRecieve.email));
+                    dispatch(setmobile(userDataRecieve.mobile));
+                    dispatch(setrole(userDataRecieve.role));
+                    navigate('/');
+                }, 1000);
             }
             else {
                 setNotRegistered(true)

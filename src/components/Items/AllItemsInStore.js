@@ -8,7 +8,7 @@ function AllItemsInStore() {
     const [listOfItem, setlistOfItem] = useState([]);
     useEffect(() => {
         axios.post("http://localhost/__payalComputersBackend/_getAllItems.php").then((response) => {
-            console.log(response)
+            // console.log(response)
             setlistOfItem(response.data);
     }).catch(err=>console.log(err));
     }, []);

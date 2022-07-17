@@ -6,11 +6,11 @@ function UserDataComp() {
 
     useEffect(() => {
         axios.get("http://localhost/__payalComputersBackend/_userdata.php").then((response) => {
-          console.log(response);
+          // // console.log(response);
             const message = response.data.message;
             if (message == "ok") {
               setdata(response.data);
-              console.log("This is data",data)
+              // console.log("This is data",data)
             } else if (message == "notLogin") {
                 setdata({"message":"not Logged In"})
             }
