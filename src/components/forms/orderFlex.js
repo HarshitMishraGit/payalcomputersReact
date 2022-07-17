@@ -19,13 +19,15 @@ function OrderFlex(props) {
     const reader = new FileReader();
     const fileref = useRef(null)
     const [filename, setfilename] = useState(null);
-    const [showFileError, setshowFileError] = useState(true);
     const [showFlexDimensionFields, setshowFlexDimensionFields] = useState(false);
     const [width, setwidth] = useState(0);
     const [height, setheight] = useState(0);
     const [dimension, setdimension] = useState('');
     const [addedItem, setaddedItem] = useState(false);
-    const [notAddedItem, setnotAddedItem] = useState(false);
+  const [notAddedItem, setnotAddedItem] = useState(false);
+  const [allowToSubmit, setallowToSubmit] = useState(false);
+  const [bigImage, setbigImage] = useState(false);
+  const [FileErrorMsg, setFileErrorMsg] = useState('')
   const [image, setimage] = useState('');
 //  ============= to show the confirmation ==========================
   const [showConfirmationModal, setshowConfirmationModal] = useState(false);
@@ -36,11 +38,31 @@ function OrderFlex(props) {
         reader.readAsDataURL(e.target.files[0])
         reader.onload = async () => { 
             setimage(reader.result);
-            setshowFileError(false);
         }
-        setfilename(e.target.files[0].name)
-      let size = e.target.files[0].size
-      console.log("The size of the file is ",size)
+      setfilename(e.target.files[0].name)
+      let size = e.target.files[0].size;
+      // console.log("The size of the file is ", size)
+      // console.log("The info of the file is ", e.target.files[0])
+      const type = e.target.files[0].type;
+      // checking the file type 
+      if (type === "image/jpeg" || type === "image/png" || type === "image/jpg") { 
+        setbigImage(false);
+        if (size > 0 && size < 5000000)
+        {
+          setbigImage(false);
+          setallowToSubmit(prevstate => !prevstate);
+        } else{
+          setbigImage(true);
+          setFileErrorMsg("Image Should Be less than 5MB");
+          setallowToSubmit(false);
+        }
+        
+      } else {
+        setbigImage(true);
+        setallowToSubmit(false);
+        setFileErrorMsg("Image Should Be Jpeg/png format");
+      }
+     
     }
     const initialValues = {
         description:'',
@@ -134,15 +156,16 @@ function OrderFlex(props) {
            >
             Upload Image
            </button>      
-           <button
-             className="bg-transparent backdrop-blur-xl rounded-lg text-white active:bg-gradient-to-r-from-indigo-200-via-purple-200-to-pink-200  font-bold uppercase text-sm px-6 py-2  shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 hover:shadow-black focus:ring-2 focus:ring-gray-200 focus:shadow-md focus:shadow-gray-600"
+           <button disabled={!allowToSubmit}
+             className={`${allowToSubmit?"bg-transparent backdrop-blur-xl hover:shadow-black focus:ring-2 focus:ring-gray-200 focus:shadow-md focus:shadow-gray-600":"bg-gray-400"} rounded-lg text-white active:bg-gradient-to-r-from-indigo-200-via-purple-200-to-pink-200  font-bold uppercase text-sm px-6 py-2  shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 `}
              type="submit" 
            >
              Save Changes
                </button>
-            </div>
+          </div>
+        
                {filename && <p className='text-sm -mt-10 font-bold text-yellow-200'>Selected File :<span className='text-gray-50'> {filename}</span> </p>}
-             {showFileError &&  <ErrorMessage className="text-orange-300 text-xs" name="pic" component="span"/>}
+               {bigImage && <span  className="text-red-400 text-xs font-bold" >{FileErrorMsg}</span> }
 
               {filename &&  <img src={image} className="my-2 shadow-lg shadow-gray-500"></img>}
                

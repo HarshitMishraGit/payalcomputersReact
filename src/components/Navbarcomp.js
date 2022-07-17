@@ -13,6 +13,7 @@ function Navbarcomp() {
   const dispatch = useDispatch();
   const name = useSelector(store => store.users.name);
   const islogin = useSelector(store => store.users.login);
+  const role = useSelector((store) => store.users.role);
   const [showLogooutModal, setshowLogooutModal] = useState(false);
   const [showlogouttext, setshowlogouttext] = useState(false);
   const DismissModal = ({logout}) => {
@@ -68,9 +69,12 @@ function Navbarcomp() {
       <Dropdown.Item>
         Settings
       </Dropdown.Item>
-            <Dropdown.Item onClick={() => { navigate('/myorders')}}>
+           {role==="user"&& <Dropdown.Item onClick={() => { navigate('/myorders')}}>
       My Orders
-      </Dropdown.Item>
+      </Dropdown.Item>}
+           {role==="admin"&& <Dropdown.Item onClick={() => { navigate('/loadallorders')}}>
+      All Orders
+      </Dropdown.Item>}
       <Dropdown.Divider />
       <Dropdown.Item onClick={()=>setshowLogooutModal(true)}>
         Sign out

@@ -16,10 +16,9 @@ import { Fragment } from "react";
 import ShowOrderNoModal from "./components/orderItem/ShowOrderNoModal";
 import UserOrders from "./components/Dashboard/UserOrders";
 import LoadAllOrdersList from "./components/Admin/LoadAllOrdersList";
-
-
+import { useSelector, useDispatch } from 'react-redux/es/exports';
 function App() {
-
+  const role = useSelector((store) => store.users.role);
   return (
       <Fragment>
       {/* // <Router basename={"/"}> */}
@@ -31,7 +30,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboardcomp />} />
         <Route path="/orderNow" element={<OrderItem />} />
         <Route path="/myorders" element={<UserOrders/>} />
-        <Route path="/env" element={<LoadAllOrdersList/>} />
+       {role==="admin"&& <Route path="/loadallorders" element={<LoadAllOrdersList/>} />}
        
         
           <Route path="*" element={<NotFound/>} />
