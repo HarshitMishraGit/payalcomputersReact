@@ -75,20 +75,20 @@ function Login() {
             {isLoading && <Loadingcomp/>}
             {Login && <SuccessAlertComp dismiss={setLogin} exclamation="Hey User " message="You have successfully Logged IN" />}
             {NotRegistered && <WarningAlertcomp dismiss={setNotRegistered} exclamation="Hey User" message="Invalid Cridentials"/>}
-    <div className='w-full md:w-1/3 mx-auto my-10 bg-gray-200 px-7 py-3 rounded-lg'>
+    <div className='w-full md:w-1/3 mx-auto my-10 bg-gray-200 dark:bg-gray-800 px-7 py-3 rounded-lg'>
      <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
           
 <Form>
 <div className="mb-6">
 <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email</label>
             <Field type="email" id="email" name="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Email" required />
-            <ErrorMessage className="text-orange-800 text-xs" name="email" component="span"/>
+            <ErrorMessage className="text-orange-800 dark:text-orange-400 text-xs" name="email" component="span"/>
             
 </div>
 <div className="mb-6">
 <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your password</label>
             <Field type="password" id="password" name="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
-            <ErrorMessage className="text-orange-800 text-xs" name="password" component="span"/>
+            <ErrorMessage className="text-orange-800 dark:text-orange-400 text-xs" name="password" component="span"/>
             
 </div>
 

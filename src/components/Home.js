@@ -31,7 +31,7 @@ let content = [
 ];
 function Home() {
   return (
-    <div>
+    <div className="dark:bg-slate-900/75 duration-700">
       {/* <CrouselScroll /> */}
       <Intro />
       <hr className="my-5 text-gray-700 text-sm border-4 border-gray-700"></hr>

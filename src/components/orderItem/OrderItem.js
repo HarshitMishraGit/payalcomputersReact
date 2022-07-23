@@ -27,12 +27,12 @@ function OrderItem() {
   }
   return (
   
-    
-   <div className='w-[90%] sm:w-1/3 flex flex-col justify-center rounded-lg shadow-lg shadow-gray-400  mx-auto my-24 space-y-4 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-opacity-20 py-16 px-10'>
+    <div className='w-full h-fit min-h-[100vh] py-12 bg-white flex flex-row justify-center items-center dark:bg-slate-900/75'>
+   <div className='w-[90%] sm:w-1/3 flex flex-col justify-center rounded-lg shadow-lg shadow-gray-400 dark:shadow-none dark:bg-white  mx-auto  space-y-4 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-opacity-20 py-16 px-10'>
 
       {!isLogin && <LoginToOrderModal show={!isLogin} dismiss={setisLogin } />}
 
-      <select name='item' ref={selectedItemRef} onChange={onChangeHandeler} onClick={ onClickHandeler}>
+      <select name='item' ref={selectedItemRef} onChange={onChangeHandeler} onClick={ onClickHandeler} >
         <option value="">Select an Item</option>
        {isLogin && <option value="Flex">Flex</option>}
         {isLogin &&<option value="Poster">Poster</option>}
@@ -44,7 +44,8 @@ function OrderItem() {
       {selectedItem === "Poster" && <OrderFlex itemName={selectedItem} dimension="inches" />}
       {selectedItem !== "Flex" && selectedItem !== "Poster" && selectedItem !== "" && <OrderVisitingCard itemName={ selectedItem} />}
       
-</div>
+      </div>
+      </div>
   )
 }
 

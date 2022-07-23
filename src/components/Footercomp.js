@@ -3,7 +3,7 @@ import { Footer } from 'flowbite-react';
 import { BsDribbble, BsFacebook, BsGithub, BsInstagram, BsTwitter } from 'react-icons/bs';
 function Footercomp() {
   return (
-      <div className='mt-4 '>
+      <div className='mt-4 relative right-0 left-0 bottom-0 '>
         <Footer className="flex flex-col bg-[] border-t-2 border-gray-300 " >
   <div className="grid w-full justify-between sm:flex sm:justify-between md:flex md:grid-cols-1">
     <div>

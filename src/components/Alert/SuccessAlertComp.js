@@ -5,7 +5,10 @@ function SuccessAlertComp(props) {
     // sending this value to the parent to close the alert
     const onDismiss = () => {
         props.dismiss(false)   
-    }
+  }
+  setTimeout(() => {
+    onDismiss()
+  }, 2000);
   return (
       <div>
             <div>
