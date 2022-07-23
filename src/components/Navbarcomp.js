@@ -91,6 +91,7 @@ function Navbarcomp() {
     >
       Home 
     </NavLink>
+    
     <NavLink to="/about"    className={({ isActive }) =>
               isActive ? "text-gray-200" : undefined
             }>
@@ -115,7 +116,18 @@ function Navbarcomp() {
               isActive ? "text-gray-200" : undefined
             }>
       Login/SignUP
-    </NavLink>}
+          </NavLink>}
+
+          <button
+      className={({ isActive }) =>
+      isActive ? "text-gray-200" : undefined
+    }
+    onClick={()=>{
+      document.documentElement.classList.toggle('dark')
+}} >
+  Mode
+    </button>
+          
   </Navbar.Collapse>
       </Navbar>
       { showlogouttext && <SuccessAlertComp dismiss={setshowlogouttext} exclamation="Hey User" message="You logout successfully"/>}

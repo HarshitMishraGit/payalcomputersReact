@@ -42,6 +42,11 @@ function SignUp() {
   const onSubmit = async(data) => {
     setuserData(data);
     setisLoading(true);
+              setresend(false);
+              setTimeout(() => {
+                setresend(true);
+                
+              }, 20000);
         // console.log("This is the recived data : " , data)
         // axios.post("https://payalcomputers.com/__testingversion1.0.0/__payalComputersBackend/_signUp.php", data).then((response) => {
         //   // console.log(response);
@@ -92,7 +97,7 @@ function SignUp() {
         {isregistered && <WarningAlertcomp dismiss={setisregistered} exclamation="Hey user" message="You are already registered" />}
         {wrongOtp && <WarningAlertcomp dismiss={setwrongOtp} exclamation="Wrong otp" message="Please enter correct otp" />}
       
-        <div className='w-3/5 mx-auto my-10 bg-gray-200 px-7 py-3 rounded-lg'>
+        <div className='w-full md:w-3/5 mx-auto my-10 bg-gray-200 px-7 py-3 rounded-lg'>
      <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
           
 <Form>
@@ -127,7 +132,8 @@ function SignUp() {
             
 </div>
 
-<button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Send The Otp</button>
+              <button disabled={!resend} type="submit" className={`text-white ${resend ? "bg-blue-700 hover:bg-blue-800" : "bg-gray-400"} focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800`}>Send The Otp</button>
+              {!resend && <p>Resend in 20s</p>}
 </Form>
           </Formik>
           {showOtpComp && <ConfirmSignUp userData={userData} setisregistered={setisregistered} setisLoading={setisLoading} setregistrationsuccess={setregistrationsuccess} otp={otp} setresend={setresend} setwrongOtp={ setwrongOtp} />}

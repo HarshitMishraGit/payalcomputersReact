@@ -8,7 +8,7 @@ function Footercomp() {
   <div className="grid w-full justify-between sm:flex sm:justify-between md:flex md:grid-cols-1">
     <div>
       <Footer.Brand
-        href="https://flowbite.com"
+        href="https://payalcomputers.com/"
         src={process.env.PUBLIC_URL+'logo.png'}
         alt="Flowbite Logo"
         name="PayalComputers"
@@ -48,7 +48,7 @@ function Footercomp() {
           </Footer.Link>
           <Footer.Link
             className="mb-4"
-            href="#"
+            href="https://wa.me/+919839976170?text"
           >
            Whatsapp
           </Footer.Link>
@@ -78,7 +78,7 @@ function Footercomp() {
   <hr className="my-6 w-full border-gray-200 p-1 dark:border-gray-700 sm:mx-auto lg:my-8" />
   <div className="w-full sm:flex sm:items-center sm:justify-between">
     <Footer.Copyright
-      href="#"
+      href="https://payalcomputers.com"
       by="PayalComputers"
       year={2022}
     />
@@ -98,7 +98,7 @@ function Footercomp() {
         className="text-gray-400 hover:text-gray-900"
         icon={BsTwitter}
       />
-      <Footer.Icon
+      {/* <Footer.Icon
         href="#"
         className="text-gray-400 hover:text-gray-900"
         icon={BsGithub}
@@ -107,7 +107,7 @@ function Footercomp() {
         href="#"
         className="text-gray-400 hover:text-gray-900"
         icon={BsDribbble}
-      />
+      /> */}
     </div>
   </div>
 </Footer>

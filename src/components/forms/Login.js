@@ -75,7 +75,7 @@ function Login() {
             {isLoading && <Loadingcomp/>}
             {Login && <SuccessAlertComp dismiss={setLogin} exclamation="Hey User " message="You have successfully Logged IN" />}
             {NotRegistered && <WarningAlertcomp dismiss={setNotRegistered} exclamation="Hey User" message="Invalid Cridentials"/>}
-    <div className='w-1/3 mx-auto my-10 bg-gray-200 px-7 py-3 rounded-lg'>
+    <div className='w-full md:w-1/3 mx-auto my-10 bg-gray-200 px-7 py-3 rounded-lg'>
      <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
           
 <Form>
