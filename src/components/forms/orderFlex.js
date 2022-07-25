@@ -160,7 +160,7 @@ function OrderFlex(props) {
              className={`${allowToSubmit?"bg-transparent backdrop-blur-xl hover:shadow-black focus:ring-2 focus:ring-gray-200 focus:shadow-md focus:shadow-gray-600":"bg-gray-400"} rounded-lg text-white active:bg-gradient-to-r-from-indigo-200-via-purple-200-to-pink-200  font-bold uppercase text-sm px-6 py-2  shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 `}
              type="submit" 
            >
-             Save Changes
+             Order Now
                </button>
           </div>
         

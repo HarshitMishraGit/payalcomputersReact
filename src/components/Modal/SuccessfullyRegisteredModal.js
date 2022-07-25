@@ -9,6 +9,7 @@ function SuccessfullyRegisteredModal(props) {
    
     const goToLoginHandeler = () => {
       navigate('/');
+      navigate('/auth');
     }
     // automatically redirect to the orders page 
     setTimeout(() => {

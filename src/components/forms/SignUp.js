@@ -17,6 +17,7 @@ function SignUp() {
   const [userData, setuserData] = useState({});
   const [resend, setresend] = useState(true);
   const [otp, setotp] = useState('');
+  const [timer, setTimer] = useState(30);
     const initialValues = {
         name:"",
         email:"",
@@ -42,11 +43,15 @@ function SignUp() {
   const onSubmit = async(data) => {
     setuserData(data);
     setisLoading(true);
-              setresend(false);
+    setresend(false);
+    const thisTimer=setInterval(() => {
+      setTimer(prevstate => prevstate - 1);
+    }, 1000);
               setTimeout(() => {
                 setresend(true);
+                clearInterval(thisTimer);
                 
-              }, 20000);
+              }, 30000);
         // console.log("This is the recived data : " , data)
         // axios.post("https://payalcomputers.com/__testingversion1.0.0/__payalComputersBackend/_signUp.php", data).then((response) => {
         //   // console.log(response);
@@ -132,8 +137,8 @@ function SignUp() {
             
 </div>
 
-              <button disabled={!resend} type="submit" className={`text-white ${resend ? "bg-blue-700 hover:bg-blue-800" : "bg-gray-400"} focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800`}>Send The Otp</button>
-              {!resend && <p>Resend in 20s</p>}
+              <button disabled={!resend} type="submit" className={`text-white ${resend ? "bg-blue-700 hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 " : "bg-gray-400"} focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center `}>Send The Otp</button>
+              {!resend && <p className="text-orange-700 dark:text-orange-400 text-xs">Resend in {timer}s</p>}
 </Form>
           </Formik>
           {showOtpComp && <ConfirmSignUp userData={userData} setisregistered={setisregistered} setisLoading={setisLoading} setregistrationsuccess={setregistrationsuccess} otp={otp} setresend={setresend} setwrongOtp={ setwrongOtp} />}
